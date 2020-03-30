@@ -9,7 +9,7 @@ var debug = require("debug")(
   "08-sql-library-manager:server"
 );
 var http = require("http");
-const sequelize = require("../models").sequelize;
+const { sequelize } = require("../models");
 
 /**
  * Get port from environment and store in Express.

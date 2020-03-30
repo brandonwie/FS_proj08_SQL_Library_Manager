@@ -1,13 +1,22 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
-  const Books = sequelize.define('Books', {
-    title: DataTypes.STRING,
-    author: DataTypes.STRING,
-    genre: DataTypes.STRING,
-    year: DataTypes.NUMBER
-  }, {});
-  Books.associate = function(models) {
-    // associations can be defined here
-  };
-  return Books;
+"use strict";
+const Sequelize = require("sequelize");
+
+module.exports = (sequelize) => {
+  Book.init(
+    {
+      title: {
+        type: Sequelize.STRING,
+        validate: {
+          notEmpty: {
+            msg: '"Title" is required',
+          },
+        },
+      },
+      author: Sequelize.STRING,
+      genre: Sequelize.STRING,
+      year: Sequelize.INTEGER,
+    },
+    { sequelize }
+  );
+  return Book;
 };
