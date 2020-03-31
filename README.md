@@ -9,6 +9,7 @@
 - [Node.js](https://nodejs.org/en/)
 - Server Framework: [Express](https://expressjs.com/)
 - ORM: [Sequelize](https://sequelize.org/) - promise-based Node.js ORM
+  - setup with [Sequelize CLI](https://github.com/sequelize/cli)
 - SQL Database Engine: [SQLite](https://www.sqlite.org/)
 
 ## Installation
@@ -29,8 +30,13 @@ npm start
 
 ## Release History
 
+- 0.1.1
+
+  - Setup all basic features
+  - Organize .pug files in place
+
 - 0.0.1
-  - Set Up Manually by `npm init`
+  - Setup Manually by `npm init`
   - Add Prettier & ESLint Settings
 
 ## Exceed Expectation Features
