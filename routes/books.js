@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Book = require("../models").Book;
+const { Book } = require("../models");
+const { Op } = require("sequelize");
 
 /* Handler function to wrap each route. */
 function asyncHandler(cb) {
@@ -17,13 +18,111 @@ function asyncHandler(cb) {
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const books = await Book.findAll({
-      order: [["createdAt", "DESC"]],
+    const page = req.query.page;
+    const query = req.query.term;
+    const limit = 5;
+    const offset = (page - 1) * limit;
+
+    if (!query) {
+      const books = await Book.findAndCountAll({
+        order: [["title", "ASC"]],
+        limit,
+        offset,
+      });
+      const totalPages = Math.ceil(
+        books.count / limit
+      );
+      res.render("books/index", {
+        books,
+        totalPages,
+        page,
+        title: "Library DB",
+      });
+    } else {
+      const books = await Book.findAndCountAll({
+        order: [["title", "ASC"]],
+        limit,
+        offset,
+        where: {
+          [Op.or]: {
+            title: {
+              [Op.like]: `%${query}%`,
+            },
+            author: {
+              [Op.like]: `%${query}%`,
+            },
+            genre: {
+              [Op.like]: `%${query}%`,
+            },
+            year: {
+              [Op.like]: `%${query}%`,
+            },
+          },
+        },
+      });
+      const totalPages = Math.ceil(
+        books.count / limit
+      );
+      res.render("books/index", {
+        books,
+        totalPages,
+        query,
+        page,
+        title: `Result(s) of ${query}`,
+      });
+    }
+  })
+);
+
+/* Search books */
+router.post(
+  "/",
+  asyncHandler(async (req, res) => {
+    let term = req.body.term.toLowerCase();
+    const page = 1;
+    const limit = 5;
+    const offset = (page - 1) * limit;
+    const books = await Book.findAndCountAll({
+      order: [["title", "ASC"]],
+      limit,
+      offset,
+      where: {
+        [Op.or]: {
+          title: {
+            [Op.like]: `%${term}%`,
+          },
+          author: {
+            [Op.like]: `%${term}%`,
+          },
+          genre: {
+            [Op.like]: `%${term}%`,
+          },
+          year: {
+            [Op.like]: `%${term}%`,
+          },
+        },
+      },
     });
-    res.render("books/index", {
-      books,
-      title: "Books",
-    });
+    const query = req.body.term;
+
+    const totalPages = Math.ceil(
+      books.count / limit
+    );
+    if (books.count > 0) {
+      res.render("books/index", {
+        books,
+        totalPages,
+        query,
+        page,
+        title: `Result(s) of ${query}`,
+      });
+    } else {
+      res.render("error", {
+        status: "No Book is Found",
+        message:
+          "There is no book you are looking for.",
+      });
+    }
   })
 );
 
@@ -37,12 +136,12 @@ router.get("/new", (req, res) => {
 
 /* POST a new book. */
 router.post(
-  "/",
+  "/new",
   asyncHandler(async (req, res) => {
     let book;
     try {
       book = await Book.create(req.body);
-      res.redirect("/books");
+      res.redirect("/");
     } catch (error) {
       if (
         error.name === "SequelizeValidationError"
@@ -54,7 +153,7 @@ router.post(
           title: "New Book",
         });
       } else {
-        throw error; // error caught in the asyncHandler's catch block
+        throw error;
       }
     }
   })
@@ -73,7 +172,9 @@ router.get(
         title: "Update Book",
       });
     } else {
-      res.render("books/page-not-found");
+      res.render("books/page-not-found", {
+        title: "Page Not Found",
+      });
     }
   })
 );
@@ -87,7 +188,7 @@ router.post(
       book = await Book.findByPk(req.params.id);
       if (book) {
         await book.update(req.body);
-        res.redirect("/books/");
+        res.redirect("/");
       } else {
         res.sendStatus(404);
       }
@@ -118,7 +219,7 @@ router.post(
     );
     if (book) {
       await book.destroy();
-      res.redirect("/books");
+      res.redirect("/");
     } else {
       res.sendStatus(404);
     }

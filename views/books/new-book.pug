@@ -4,7 +4,7 @@ block content
 
   include form-errors
   
-  form(action="/books", method="post")
+  form(action="/books/new", method="post")
     p
       label(for="title") Title:
       input(type="text", name="title" value=book.title)
@@ -20,4 +20,4 @@ block content
     p
       input(type="submit" value="Create New Book")
     p
-      a(class="button" href="/books") Cancel
+      a(class="button" href="/") Cancel

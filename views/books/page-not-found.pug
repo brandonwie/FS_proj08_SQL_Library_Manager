@@ -1,8 +1,7 @@
-doctype html
-html
-  head
-    title= "Page Not Found"
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    h1= "Server Error"
-    p= "Sorry! There was an unexpected error on the server."
+extends ../layout
+
+block content
+    p= "Sorry! We couldn't find the page you were looking for."
+    br
+    p
+      a(class="button" href="/") Home
