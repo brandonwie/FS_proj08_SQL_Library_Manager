@@ -118,9 +118,9 @@ router.post(
       });
     } else {
       res.render("error", {
-        status: "No Book is Found",
+        title: "No Book is Found",
         message:
-          "There is no book you are looking for.",
+          "Sorry, there is no book you are looking for.",
       });
     }
   })
@@ -153,7 +153,9 @@ router.post(
           title: "New Book",
         });
       } else {
-        throw error;
+        throw (error = {
+          title: "LOVE",
+        });
       }
     }
   })
@@ -197,14 +199,14 @@ router.post(
         error.name === "SequelizeValidationError"
       ) {
         book = await Book.build(req.body);
-        article.id = req.params.id; // make sure correct book gets updated
-        res.render("books/edit", {
+        book.id = req.params.id; // make sure correct book gets updated
+        res.render("books/update-book", {
           book,
           errors: error.errors,
           title: "Update Book",
         });
       } else {
-        throw error;
+        res.sendStatus(404);
       }
     }
   })

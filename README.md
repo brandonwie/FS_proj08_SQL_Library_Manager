@@ -30,6 +30,13 @@ npm start
 
 ## Release History
 
+- 0.2.1
+
+  - TODO: Need a global error handler setting
+  - nodemon is installed as dev-dependency
+  - add year validation
+  - create form.pug, manage it separately / add id attribute to labels
+
 - 0.1.1
 
   - Setup all basic features

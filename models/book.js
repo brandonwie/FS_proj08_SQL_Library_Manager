@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
         type: Sequelize.STRING,
         validate: {
           notEmpty: {
-            msg: '"TITLE" is required',
+            msg: '"Title" is required.',
           },
         },
       },
@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
         type: Sequelize.STRING,
         validate: {
           notEmpty: {
-            msg: '"AUTHOR" is required',
+            msg: '"Author" is required.',
           },
         },
       },
@@ -26,6 +26,12 @@ module.exports = (sequelize) => {
       },
       year: {
         type: Sequelize.INTEGER,
+        // validate: {
+        //   is: {
+        //     args: /[1-2]\d{3}/,
+        //     msg: "Type a valid year.",
+        //   },
+        // },
       },
     },
     { sequelize }

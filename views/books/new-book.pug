@@ -5,18 +5,7 @@ block content
   include form-errors
   
   form(action="/books/new", method="post")
-    p
-      label(for="title") Title:
-      input(type="text", name="title" value=book.title)
-    p
-      label(for="author") Author:
-      input(type="text", name="author" value=book.author)
-    p
-      label(for="genre") Genre:
-      input(type="text", name="genre" value=book.genre)
-    p
-      label(for="year") Year:
-      input(type="text", name="year" value=book.year)
+    include form
     p
       input(type="submit" value="Create New Book")
     p

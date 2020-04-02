@@ -28,7 +28,7 @@ block content
     p(class="pagination")
       while number <= totalPages
         a(href =`/books/?page=${number}&term=${query}`, class=`button ${number === parseInt(page) ? "active":""}`)= number++
-    a(class="button" href="../")  Go back
+    a(class="button" href="../")  Back
   else
     - let number = 1
     p(class="pagination")

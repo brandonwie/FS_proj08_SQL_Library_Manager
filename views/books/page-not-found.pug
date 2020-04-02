@@ -1,7 +1,11 @@
-extends ../layout
-
-block content
-    p= "Sorry! We couldn't find the page you were looking for."
-    br
-    p
-      a(class="button" href="/") Home
+doctype html
+html
+  head
+    title= "Page Not Found"
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    header
+      h1= "Server Error"
+      p= "Sorry! There was an unexpected error on the server." 
+      p
+        a(class="button" href="/") Home
