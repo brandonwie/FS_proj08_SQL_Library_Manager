@@ -1,0 +1,11 @@
+if query
+  - let number = 1
+  p(class="pagination")
+    while number <= totalPages
+      a(href =`/books/?page=${number}&term=${query}`, class=`button ${number === parseInt(page) ? "active":""}`)= number++
+  a(class="button" href="../")  Back
+else
+  - let number = 1
+  p(class="pagination")
+    while number <= totalPages
+      a(href =`/books/?page=${number}`, class=`button ${number === parseInt(page) ? "active":""}`)= number++

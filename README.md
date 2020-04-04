@@ -1,6 +1,6 @@
 # SQL Library Manager V1
 
-[![npm version](https://badgen.net/badge/npm/v6.13.7/green?icon=npm)](https://www.npmjs.com/) [![build](https://badgen.net/badge/build/building/orange?icon=libraries)](https://github.com/brandonwie) [![version](https://badgen.net/badge/version/v0.0.1/orange?icon=kofi)](https://github.com/brandonwie)
+[![npm version](https://badgen.net/badge/npm/v6.13.7/green?icon=npm)](https://www.npmjs.com/) [![build](https://badgen.net/badge/build/launched/green?icon=libraries)](https://github.com/brandonwie) [![version](https://badgen.net/badge/version/v1.0.0/green?icon=kofi)](https://github.com/brandonwie)
 
 > SQL Library Manager
 
@@ -29,6 +29,12 @@ npm start
 - ORM: Sequelize(Node.js ORM)
 
 ## Release History
+
+- 1.0.0
+
+  - Fix Error-Hander-Middleware Issue
+  - Add Custom Validation for 'YEAR' model
+  - READY TO SUBMIT
 
 - 0.2.1
 

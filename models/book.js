@@ -21,18 +21,8 @@ module.exports = (sequelize) => {
           },
         },
       },
-      genre: {
-        type: Sequelize.STRING,
-      },
-      year: {
-        type: Sequelize.INTEGER,
-        // validate: {
-        //   is: {
-        //     args: /[1-2]\d{3}/,
-        //     msg: "Type a valid year.",
-        //   },
-        // },
-      },
+      genre: Sequelize.STRING,
+      year: Sequelize.INTEGER,
     },
     { sequelize }
   );

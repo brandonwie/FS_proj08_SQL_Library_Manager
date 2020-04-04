@@ -1,38 +1,29 @@
 extends ../layout
 
 block content
-  div(class="search-bar")
-    form(action="/books", method="post" )
-      input(type="search" name="term" placeholder="Search...")
-      input.search-button(type="submit", value="search")
-  p
-    a.button(href="/books/new") Create New Book
-  table
-    thead
-      tr
-        th= "Title"
-        th= "Author"
-        th= "Genre"
-        th= "Year"
-    tbody
-      each book in books.rows
-        book
-          tr
-            td
-              a(href= "/books/" + book.id)= book.title
-            td= book.author
-            td= book.genre
-            td= book.year
-  if query
-    - let number = 1
-    p(class="pagination")
-      while number <= totalPages
-        a(href =`/books/?page=${number}&term=${query}`, class=`button ${number === parseInt(page) ? "active":""}`)= number++
-    a(class="button" href="../")  Back
-  else
-    - let number = 1
-    p(class="pagination")
-      while number <= totalPages
-        a(href =`/books/?page=${number}`, class=`button ${number === parseInt(page) ? "active":""}`)= number++
-    
+  header
+    h1= title
+    div(class="search-bar")
+      form(action="/books", method="post" )
+        input(type="search" name="term" placeholder="Search...")
+        input.search-button(type="submit", value="search")
+    p
+      a.button(href="/books/new") Create New Book
+    table
+      thead
+        tr
+          th= "Title"
+          th= "Author"
+          th= "Genre"
+          th= "Year"
+      tbody
+        each book in books.rows
+          book
+            tr
+              td
+                a(href= "/books/" + book.id)= book.title
+              td= book.author
+              td= book.genre
+              td= book.year
+    include pagination
 

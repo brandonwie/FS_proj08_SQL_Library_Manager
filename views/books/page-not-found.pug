@@ -1,11 +1,7 @@
-doctype html
-html
-  head
-    title= "Page Not Found"
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    header
-      h1= "Server Error"
-      p Sorry! We couldn't find the page you were looking for. 
-      p
-        a(class="button" href="/") Home
+extends ../layout
+
+block content
+  h1= heading
+  p= message
+  p
+    a(class="button" href="/") Home

@@ -39,10 +39,29 @@ app.use(function (err, req, res, next) {
       : {};
   console.log(err.message, err.status);
 
+  /******************************
+  Error Handler Middleware
+******************************/
+
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
-  console.log("Caught on app.js:  404");
+  if (err.status === 404) {
+    // if there's no page exist
+    res.render("books/page-not-found", {
+      title: "Page Not Found",
+      heading: "Page Not Found",
+      message:
+        "Sorry! We couldn't find the page you were looking for.",
+    });
+  } else {
+    // if there's no book ID exist (or other errors caught)
+    res.render("books/page-not-found", {
+      title: "Page Not Found",
+      heading: "Server Not Found",
+      message:
+        "Sorry! There was an unexpected error on the server.",
+    });
+  }
 });
 
 module.exports = app;

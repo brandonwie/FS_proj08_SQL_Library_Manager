@@ -10,7 +10,6 @@ function asyncHandler(cb) {
       await cb(req, res, next);
     } catch (error) {
       res.status(500).send(error);
-      console.log("Error: ", error);
     }
   };
 }
@@ -163,17 +162,16 @@ router.post(
 router.get(
   "/:id",
   asyncHandler(async (req, res) => {
-    const book = await Book.findByPk(
-      req.params.id
-    );
-    if (book) {
+    try {
+      const book = await Book.findByPk(
+        req.params.id
+      );
       res.render("books/update-book", {
         book,
         title: "Update Book",
       });
-    } else {
-      console.log("GET: NO ID EXIST");
-      res.sendStatus(404);
+    } catch (error) {
+      throw error;
     }
   })
 );
