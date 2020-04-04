@@ -1,11 +1,12 @@
 doctype html
 html
   head
-    title= "Page Not Found"
+    title Search: No Result
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     header
-      h1= "Page Not Found"
-      p Sorry! There was an unexpected error on the server.
+      h1 No Book is Found
+      h2 Keyword: "#{query}"
+      p Sorry, there is no book you are looking for.
       p
         a(class="button" href="/") Home

@@ -10,6 +10,7 @@ function asyncHandler(cb) {
       await cb(req, res, next);
     } catch (error) {
       res.status(500).send(error);
+      console.log("Error: ", error);
     }
   };
 }
@@ -36,7 +37,7 @@ router.get(
         books,
         totalPages,
         page,
-        title: "Library DB",
+        title: "Library Database",
       });
     } else {
       const books = await Book.findAndCountAll({
@@ -108,6 +109,7 @@ router.post(
     const totalPages = Math.ceil(
       books.count / limit
     );
+    // if no book is found, render an error page
     if (books.count > 0) {
       res.render("books/index", {
         books,
@@ -117,10 +119,8 @@ router.post(
         title: `Result(s) of ${query}`,
       });
     } else {
-      res.render("error", {
-        title: "No Book is Found",
-        message:
-          "Sorry, there is no book you are looking for.",
+      res.render("books/book-not-found", {
+        query,
       });
     }
   })
@@ -153,9 +153,7 @@ router.post(
           title: "New Book",
         });
       } else {
-        throw (error = {
-          title: "LOVE",
-        });
+        throw error;
       }
     }
   })
@@ -174,9 +172,8 @@ router.get(
         title: "Update Book",
       });
     } else {
-      res.render("books/page-not-found", {
-        title: "Page Not Found",
-      });
+      console.log("GET: NO ID EXIST");
+      res.sendStatus(404);
     }
   })
 );
@@ -206,7 +203,7 @@ router.post(
           title: "Update Book",
         });
       } else {
-        res.sendStatus(404);
+        throw error;
       }
     }
   })

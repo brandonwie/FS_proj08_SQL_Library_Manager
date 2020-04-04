@@ -4,9 +4,9 @@ block content
   div(class="search-bar")
     form(action="/books", method="post" )
       input(type="search" name="term" placeholder="Search...")
-      input(type="submit", value="search", class="search-button")
+      input.search-button(type="submit", value="search")
   p
-    a(class="button" href="/books/new") Create New Book
+    a.button(href="/books/new") Create New Book
   table
     thead
       tr

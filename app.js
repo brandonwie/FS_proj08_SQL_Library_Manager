@@ -37,10 +37,12 @@ app.use(function (err, req, res, next) {
     req.app.get("env") === "development"
       ? err
       : {};
+  console.log(err.message, err.status);
 
   // render the error page
   res.status(err.status || 500);
   res.render("error");
+  console.log("Caught on app.js:  404");
 });
 
 module.exports = app;

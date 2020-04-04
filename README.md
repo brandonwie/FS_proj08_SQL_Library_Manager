@@ -48,4 +48,5 @@ npm start
 
 ## Exceed Expectation Features
 
-- upcoming...
+- Search Function with Sequelize.Op
+- Pagination (5 books per page)
